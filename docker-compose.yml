@@ -1,0 +1,36 @@
+
+services:
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "5001:5001"
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    ports:
+      - "5002:5002"
+    environment:
+      AUTH_SERVICE_URL: http://auth-service:5001
+    depends_on:
+      auth-service:
+        condition: service_healthy
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5002/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  appnet:
+    driver: bridge

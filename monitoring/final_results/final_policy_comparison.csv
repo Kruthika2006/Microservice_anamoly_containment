@@ -1,0 +1,6 @@
+Action,Basic Policy,Proposed Policy,Basic Cost,Proposed Cost
+LOG,23,23,0,0
+ALERT,15,4,30,8
+RATE_LIMIT,0,15,0,75
+ISOLATE,4,0,120,0
+TOTAL,42,42,0,0

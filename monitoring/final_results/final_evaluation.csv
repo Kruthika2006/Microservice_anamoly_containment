@@ -1,0 +1,8 @@
+Metric,Value
+Normal test records,27.0
+Attack test records,15.0
+Correctly classified normal,23.0
+False positives,4.0
+Correctly detected attacks,15.0
+Missed attacks,0.0
+Accuracy,0.90476
